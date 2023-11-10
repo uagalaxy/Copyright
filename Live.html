@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>live cast</title>
+</head>
+<body style="display: flex;margin: 0;flex-direction: column;align-items: center;">
+    <video style="width: 100%;" autoplay src=""></video>
+    <button style="border: 0;font-size: 20px;padding: 5px;background: #d9f3f9;position: fixed;border-radius: 10px;bottom: 10px;" id="flip">going live</button>
+    <script>
+        var front = false
+        var video = document.querySelector('video');
+        document.getElementById('flip').onclick= function(){front= !front}
+        var constraints = { video:(front? "user":"environment"), width: "100%"}
+        navigator.mediaDevices.getUserMedia(constraints).then(function(mediastream) {
+            video.srcObject = mediastream;
+            video.onloadedmetadata = function(e){
+                video.play
+            }
+        })
+    </script>
+</body>
+</html>
